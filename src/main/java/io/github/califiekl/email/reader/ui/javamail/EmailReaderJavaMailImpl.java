@@ -31,7 +31,7 @@ public class EmailReaderJavaMailImpl implements EmailReader {
             System.out.println("store is null, return");return;
         }
         try{
-            store.connect("outlook.office365.com", "califiekl@outlook.com", accessToken);
+            store.connect("outlook.office365.com", "mymails", accessToken);
         }catch(Exception ex){}
     }
 }

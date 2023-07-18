@@ -54,7 +54,7 @@ public class EmailReaderMSGraphAPIImpl implements EmailReader {
         requestURLBuilder.append(EmailReaderUIConfig.TENANT_ID);
         requestURLBuilder.append("/users/");
         try {
-            requestURLBuilder.append(URLEncoder.encode("califiekl@califiekluogmail.onmicrosoft.com", "UTF-8"));
+            requestURLBuilder.append(URLEncoder.encode("user_id", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new EmailReaderUIException("cannot encode user: "+e.getMessage());
         }
