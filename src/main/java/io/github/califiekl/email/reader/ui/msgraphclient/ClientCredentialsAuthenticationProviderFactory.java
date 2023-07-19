@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class ClientCredentialsAuthenticationProviderFactory{
     private static Map<CustomApplication, AuthenticationProviderGetter> authenticationProviderGetterMap;
-    static {
+/*    static {
         authenticationProviderGetterMap = new HashMap<>();
         authenticationProviderGetterMap.put(CustomApplication.EMAIL_READER, new ClientCredentialsAuthenticationProviderImpl());
-    }
+    }*/
 
     public static IAuthenticationProvider getProvider(CustomApplication app){
         AuthenticationProviderGetter authenticationProviderGetterImpl = authenticationProviderGetterMap.get(app);

@@ -18,10 +18,16 @@ import java.util.Map;
 public abstract class AuthTokenGetter {
 
     protected final String ACCESS_TOKEN_KEY = "access_token";
+    protected ClientApplication clientApp;
 
     protected abstract String getTokenRequestURL();
     protected abstract String getTokenRequestEncodedBody();
 
+    public AuthTokenGetter(ClientApplication clientApp){
+        if(null == clientApp)
+            throw new EmailReaderUIException("cannot get token on null client app");
+        this.clientApp = clientApp;
+    }
     public  String getAuthToken(){
         try{
             String response = getAuthTokenString();
@@ -46,6 +52,10 @@ public abstract class AuthTokenGetter {
         loginPost.addHeader(new BasicHeader("cache-control","no-cache"));
         CloseableHttpResponse loginResponse = client.execute(loginPost);
         return EntityUtils.toString(loginResponse.getEntity());
+    }
+
+    public ClientApplication getClientApp() {
+        return clientApp;
     }
 
     private void validateUrlAndEncodedBody(String url, String encodedBody){

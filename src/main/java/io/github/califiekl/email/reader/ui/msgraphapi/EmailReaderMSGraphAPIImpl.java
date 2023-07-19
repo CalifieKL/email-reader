@@ -1,8 +1,11 @@
 package io.github.califiekl.email.reader.ui.msgraphapi;
 
 
+import io.github.califiekl.email.reader.ui.AuthTokenGetter;
+import io.github.califiekl.email.reader.ui.ClientApplication;
 import io.github.califiekl.email.reader.ui.EmailReader;
 import io.github.califiekl.email.reader.ui.EmailReaderUIConfig;
+import io.github.califiekl.email.reader.ui.client.SampleServiceAccountGetter;
 import io.github.califiekl.email.reader.util.EmailReaderUIException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,47 +17,54 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
-public class EmailReaderMSGraphAPIImpl implements EmailReader {
+public class EmailReaderMSGraphAPIImpl extends EmailReader {
 
-    public static final String BEARER = "Bearer ";
-    public static final String AUTHORIZATION = "Authorization";
+    private final String BEARER = "Bearer ";
+    private final String AUTHORIZATION = "Authorization";
+
+    public EmailReaderMSGraphAPIImpl(AuthTokenGetter tokenGetter){ super(tokenGetter);}
 
     @Override
-    public List<Object> read(String accessToken){
+    protected void setServiceAccountGetter(){
+        accountGetter = new SampleServiceAccountGetter();
+    }
+
+    @Override
+    public List<Map<String, String>> read(){
+        String accessToken = tokenGetter.getAuthToken();
+        System.out.println("accessToken: " + accessToken);
+        try {
+            String emailEntityString = getMessageEntityString(accessToken);
+            System.out.println(emailEntityString);
+            return readFrom(emailEntityString);
+        } catch (IOException ex) {
+            throw new EmailReaderUIException("cannot read email: "+ ex.getMessage());
+        }
+    }
+
+    public List<Map<String, String>> readFrom(String messageEntityString) throws IOException {
 
         return null;
     }
 
-    public static List<Object> readFrom(String accessToken) throws IOException {
-        try{
-            byte[] response = getMessageByteArray(accessToken);
-
-            //System.out.println(response.toString());
-
-            return null;
-        } catch(IOException ioException){
-            throw new EmailReaderUIException("unable to read email: "+ ioException.getMessage());
-        }
-    }
-
-    private static byte[] getMessageByteArray(String accessToken) throws IOException {
+    private String getMessageEntityString(String accessToken) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpGet getMessages = new HttpGet(getMessageRequestURL());
         getMessages.setHeader(AUTHORIZATION, BEARER+accessToken);
         CloseableHttpResponse getMessageResponse = client.execute(getMessages);
-        System.out.println(EntityUtils.toString(getMessageResponse.getEntity()));
-
-        return null;
+        String messageEntityString = EntityUtils.toString(getMessageResponse.getEntity());
+        return messageEntityString;
     }
 
-    private static String getMessageRequestURL() {
+    private String getMessageRequestURL() {
         StringBuilder requestURLBuilder = new StringBuilder();
         requestURLBuilder.append("https://graph.microsoft.com/v1.0/");
-        requestURLBuilder.append(EmailReaderUIConfig.TENANT_ID);
+        requestURLBuilder.append(tokenGetter.getClientApp().getTenantId());
         requestURLBuilder.append("/users/");
         try {
-            requestURLBuilder.append(URLEncoder.encode("user_id", "UTF-8"));
+            requestURLBuilder.append(URLEncoder.encode(accountGetter.getServiceAccountId(), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new EmailReaderUIException("cannot encode user: "+e.getMessage());
         }

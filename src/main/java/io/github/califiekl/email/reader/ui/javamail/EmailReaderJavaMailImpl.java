@@ -1,18 +1,27 @@
 package io.github.califiekl.email.reader.ui.javamail;
 
+import io.github.califiekl.email.reader.ui.AuthTokenGetter;
 import io.github.califiekl.email.reader.ui.EmailReader;
 import io.github.califiekl.email.reader.util.EmailReaderUIException;
 
 import javax.mail.Session;
 import javax.mail.Store;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
-public class EmailReaderJavaMailImpl implements EmailReader {
+public class EmailReaderJavaMailImpl extends EmailReader {
     static Properties properties = System.getProperties();
     static Session session =Session.getInstance(properties);
+
+    public EmailReaderJavaMailImpl(AuthTokenGetter tokenGetter){super(tokenGetter);}
+
     @Override
-    public List<Object> read(String accessToken) {
+    protected void setServiceAccountGetter(){
+
+    }
+    @Override
+    public List<Map<String, String>> read() {
         return null;
     }
 
@@ -31,7 +40,7 @@ public class EmailReaderJavaMailImpl implements EmailReader {
             System.out.println("store is null, return");return;
         }
         try{
-            store.connect("outlook.office365.com", "mymails", accessToken);
+            store.connect("outlook.office365.com", "mail@test.coms", accessToken);
         }catch(Exception ex){}
     }
 }
