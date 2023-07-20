@@ -7,10 +7,18 @@ import java.util.Map;
 
 public abstract class EmailReader {
      protected final String MESSAGES_DATA_FIELD = "value";
-     protected final String SUBJECT = "subject";
-     protected final String BODY = "bodyPreview";
+
+     protected enum MessageGlossary {
+          SUBJECT("subject"), BODY("bodyPreview"),
+          SENDER("sender"), FROM("from");
+          private String fieldName;
+          private MessageGlossary(String fieldName){
+               this.fieldName = fieldName;
+          }
+          public String getFieldName(){ return fieldName; }
+     }
      protected AuthTokenGetter tokenGetter;
-     protected ServiceAccountGetter accountGetter;
+     protected MailboxConfigurationGetter mailboxConfigurationGetter;
 
      protected abstract void setServiceAccountGetter();
 
@@ -21,10 +29,10 @@ public abstract class EmailReader {
           setServiceAccountGetter();
      }
 
-     public ServiceAccountGetter getServiceAccountGetter(){
-          if(null == accountGetter)
+     public MailboxConfigurationGetter getServiceAccountGetter(){
+          if(null == mailboxConfigurationGetter)
                throw new EmailReaderUIException("no service account specified");
-          return accountGetter;
+          return mailboxConfigurationGetter;
      }
      public abstract List<Map<String, String>> read();
 }
