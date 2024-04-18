@@ -3,5 +3,5 @@
 /workspace.xml
 /target
 /.idea
-src/main/java/io/github/califiekl/email/reader/ui/client/
+src/main/java/io/github/califiekl/email/reader/web/client/
 src/main/java/org/example

@@ -1,10 +1,10 @@
-package io.github.califiekl.email.reader.ui.msgraphapi;
+package io.github.califiekl.email.reader.web.msgraphapi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.califiekl.email.reader.ui.AuthTokenGetter;
-import io.github.califiekl.email.reader.ui.EmailReader;
-import io.github.califiekl.email.reader.ui.client.SampleMailboxConfigGetter;
+import io.github.califiekl.email.reader.web.AuthTokenGetter;
+import io.github.califiekl.email.reader.web.EmailReader;
+import io.github.califiekl.email.reader.web.client.SampleMailboxConfigGetter;
 import io.github.califiekl.email.reader.util.EmailReaderUIException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -12,7 +12,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import javax.mail.Message;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -83,6 +82,7 @@ public class EmailReaderMSGraphAPIImpl extends EmailReader {
         getMessages.setHeader(AUTHORIZATION, BEARER+accessToken);
         CloseableHttpResponse getMessageResponse = client.execute(getMessages);
         String messageEntityString = EntityUtils.toString(getMessageResponse.getEntity());
+        System.out.println(messageEntityString);
         return messageEntityString;
     }
 

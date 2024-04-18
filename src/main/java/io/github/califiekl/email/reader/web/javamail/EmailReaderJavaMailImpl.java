@@ -1,7 +1,7 @@
-package io.github.califiekl.email.reader.ui.javamail;
+package io.github.califiekl.email.reader.web.javamail;
 
-import io.github.califiekl.email.reader.ui.AuthTokenGetter;
-import io.github.califiekl.email.reader.ui.EmailReader;
+import io.github.califiekl.email.reader.web.AuthTokenGetter;
+import io.github.califiekl.email.reader.web.EmailReader;
 import io.github.califiekl.email.reader.util.EmailReaderUIException;
 
 import javax.mail.Session;

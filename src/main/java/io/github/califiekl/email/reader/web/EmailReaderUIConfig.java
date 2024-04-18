@@ -1,4 +1,4 @@
-package io.github.califiekl.email.reader.ui;
+package io.github.califiekl.email.reader.web;
 
 public class EmailReaderUIConfig {
     public static final String MS_GRAPH_SCOPE = "https://graph.microsoft.com/.default";

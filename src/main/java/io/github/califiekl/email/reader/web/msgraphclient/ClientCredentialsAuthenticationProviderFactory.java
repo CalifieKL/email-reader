@@ -1,9 +1,8 @@
-package io.github.califiekl.email.reader.ui.msgraphclient;
+package io.github.califiekl.email.reader.web.msgraphclient;
 
 import com.microsoft.graph.authentication.IAuthenticationProvider;
-import io.github.califiekl.email.reader.ui.EmailReaderUIConfig.CustomApplication;
+import io.github.califiekl.email.reader.web.EmailReaderUIConfig.CustomApplication;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ClientCredentialsAuthenticationProviderFactory{

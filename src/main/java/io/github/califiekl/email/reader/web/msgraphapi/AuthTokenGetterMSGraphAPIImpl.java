@@ -1,8 +1,8 @@
-package io.github.califiekl.email.reader.ui.msgraphapi;
+package io.github.califiekl.email.reader.web.msgraphapi;
 
-import io.github.califiekl.email.reader.ui.AuthTokenGetter;
-import io.github.califiekl.email.reader.ui.ClientApplication;
-import io.github.califiekl.email.reader.ui.EmailReaderUIConfig;
+import io.github.califiekl.email.reader.web.AuthTokenGetter;
+import io.github.califiekl.email.reader.web.ClientApplication;
+import io.github.califiekl.email.reader.web.EmailReaderUIConfig;
 
 public class AuthTokenGetterMSGraphAPIImpl extends AuthTokenGetter {
 

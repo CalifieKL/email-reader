@@ -1,4 +1,4 @@
-package io.github.califiekl.email.reader.ui.msgraphclient;
+package io.github.califiekl.email.reader.web.msgraphclient;
 
 import com.microsoft.graph.authentication.IAuthenticationProvider;
 

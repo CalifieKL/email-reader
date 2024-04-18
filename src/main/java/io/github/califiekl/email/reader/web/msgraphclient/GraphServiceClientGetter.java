@@ -1,8 +1,8 @@
-package io.github.califiekl.email.reader.ui.msgraphclient;
+package io.github.califiekl.email.reader.web.msgraphclient;
 
 import com.microsoft.graph.authentication.IAuthenticationProvider;
 import com.microsoft.graph.requests.GraphServiceClient;
-import io.github.califiekl.email.reader.ui.EmailReaderUIConfig.CustomApplication;
+import io.github.califiekl.email.reader.web.EmailReaderUIConfig.CustomApplication;
 import io.github.califiekl.email.reader.util.EmailReaderCoreException;
 
 public class GraphServiceClientGetter {

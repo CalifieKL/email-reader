@@ -1,4 +1,4 @@
-package io.github.califiekl.email.reader.ui;
+package io.github.califiekl.email.reader.web;
 
 import io.github.califiekl.email.reader.util.EmailReaderUIException;
 

@@ -1,4 +1,4 @@
-package io.github.califiekl.email.reader.ui;
+package io.github.califiekl.email.reader.web;
 
 public interface MailboxConfigurationGetter {
     String getServiceAccountId();

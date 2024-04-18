@@ -1,4 +1,4 @@
-package io.github.califiekl.email.reader.ui;
+package io.github.califiekl.email.reader.web;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
